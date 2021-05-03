@@ -1,0 +1,47 @@
+create table customer(cust_id int primary key,address varchar(25),city varchar(10),ph_no int);
+Query OK, 0 rows affected (1.70 sec)
+mysql> desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| cust_id | int         | NO   | PRI | NULL    |       |
+| address | varchar(25) | YES  |     | NULL    |       |
+| city    | varchar(10) | YES  |     | NULL    |       |
+| ph_no   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.09 sec)
+create table product(p_id int primary key,price decimal(3,2)default'0');
+Query OK, 0 rows affected (2.29 sec)
+mysql> desc product;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| p_id  | int          | NO   | PRI | NULL    |       |
+| price | decimal(3,2) | YES  |     | 0.00    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+mysql> create table invoice_master(inv_id int primary key,cust_id int,inv_date date,constraint fk_cust_id foreign key (cust_id) references customer(cust_id));
+Query OK, 0 rows affected (3.11 sec)
+
+mysql> desc invoice_master;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | NO   | PRI | NULL    |       |
+| cust_id  | int  | YES  | MUL | NULL    |       |
+| inv_date | date | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> create table invoice_item(inv_id int,p_id int,quantity decimal(3,2) default'0',constraint fk_inv_id foreign key (inv_id) references invoice_master(inv_id),constraint fk_p_id foreign key (p_id) references product(p_id));
+Query OK, 0 rows affected (1.23 sec)
+
+mysql> desc invoice_item
+    -> ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| inv_id   | int          | YES  | MUL | NULL    |       |
+| p_id     | int          | YES  | MUL | NULL    |       |
+| quantity | decimal(3,2) | YES  |     | 0.00    |       |
++----------+--------------+------+-----+---------+-------+
+3 rows in set (0.25 sec)
