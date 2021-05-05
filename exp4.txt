@@ -1,0 +1,131 @@
+mysql> use INVOICE;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_invoice |
++-------------------+
+| customer          |
+| invoice_item      |
+| invoice_master    |
+| product           |
++-------------------+
+4 rows in set (0.37 sec)
+
+mysql> alter table customer add name varchar(20);
+Query OK, 0 rows affected (2.55 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| cust_id | int         | NO   | PRI | NULL    |       |
+| address | varchar(25) | YES  |     | NULL    |       |
+| city    | varchar(50) | YES  |     | NULL    |       |
+| ph_no   | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.21 sec)
+
+mysql> insert into customer(cust_id,address,city,name)values(1,'marakars kappad','calicut','Amna');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into customer(cust_id,address,city,name)values(2,'sopanam panampillynagar','Ernakulam','Arya');
+Query OK, 1 row affected (0.26 sec)
+
+mysql> insert into customer(cust_id,address,city,ph_no,name)values(3,'deepam gandhinagar','Thiruvananthapuram',9567130694,'Manu');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into customer(cust_id,address,city,name,ph_no)values(4,'geetha 2ndstreet','alapuzha','Aami',9567130600);
+Query OK, 1 row affected (0.14 sec)
+
+mysql>  insert into customer(cust_id,address,city,ph_no,name)values(5,'jannath kanjirapally','kottayam',9568730600,'Nihal');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from customer;
++---------+-------------------------+--------------------+------------+-------+
+| cust_id | address                 | city               | ph_no      | name  |
++---------+-------------------------+--------------------+------------+-------+
+|       1 | marakars kappad         | calicut            | NULL       | Amna  |
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya  |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu  |
+|       4 | geetha 2ndstreet        | alappuzha          | 9567130600 | Aami  |
+|       5 | jannath kanjirapally    | kottayam           | 9568730600 | Nihal |
++---------+-------------------------+--------------------+------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into product(p_id,p_name,price)values(1000,'Butter',40);
+
+mysql>  insert into product(p_id,p_name,price)values(1001,'cheese',125);
+Query OK, 1 row affected (0.16 sec)
+
+mysql>  insert into product(p_id,p_name,price)values(1002,'sauce',100);
+Query OK, 1 row affected (0.18 sec)
+
+mysql>  insert into product(p_id,p_name,price)values(1003,'detergent',206);
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from product;
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+| 1000 | Butter    |    40 |
+| 1001 | cheese    |   125 |
+| 1002 | sauce     |   100 |
+| 1003 | detergent |   206 |
++------+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql>  insert into invoice_master(inv_id,cust_id,inv_date)values(1,1,'2021-01-02');
+Query OK, 1 row affected (0.24 sec)
+
+mysql>  insert into invoice_master(inv_id,cust_id,inv_date)values(2,2,'2021-01-10');
+Query OK, 1 row affected (0.23 sec)
+
+mysql>  insert into invoice_master(inv_id,cust_id,inv_date)values(3,3,'2021-01-12');
+Query OK, 1 row affected (0.19 sec)
+
+mysql>  insert into invoice_master(inv_id,cust_id,inv_date)values(4,4,'2021-03-21');
+Query OK, 1 row affected (0.13 sec)
+
+mysql>  insert into invoice_master(inv_id,cust_id,inv_date)values(5,5,'2021-02-26');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|      1 |       1 | 2021-01-02 |
+|      2 |       2 | 2021-01-10 |
+|      3 |       3 | 2021-01-12 |
+|      4 |       4 | 2021-03-21 |
+|      5 |       5 | 2021-02-26 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into invoice_item(inv_id,p_id,quantity)values(1,1000,5);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into invoice_item(inv_id,p_id,quantity)values(2,1001,15);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into invoice_item(inv_id,p_id,quantity)values(3,1002,40);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into invoice_item(inv_id,p_id,quantity)values(4,1003,25);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into invoice_item(inv_id,p_id,quantity)values(5,1003,7);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|      1 | 1000 |        5 |
+|      2 | 1001 |       15 |
+|      3 | 1002 |       40 |
+|      4 | 1003 |       25 |
+|      5 | 1003 |        7 |
++--------+------+----------+
+5 rows in set (0.00 sec)
