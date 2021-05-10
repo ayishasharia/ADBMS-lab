@@ -1,0 +1,130 @@
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student(roll_no,name,department)values(13,'Nihal','BBA');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into student(roll_no,name,department)values(1,'Arya','BBA');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into student(roll_no,name,department)values(20,'vihan','BBA');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into student(roll_no,name,department)values(11,'Mira','BBA');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into student(roll_no,name,department)values(18,'shreya','BBA');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from student;
++---------+--------+------------+
+| roll_no | name   | department |
++---------+--------+------------+
+|      13 | Nihal  | BBA        |
+|       1 | Arya   | BBA        |
+|      20 | vihan  | BBA        |
+|      11 | Mira   | BBA        |
+|      18 | shreya | BBA        |
++---------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into student(roll_no,name,department)values(10,'Raya','BBA');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from student;
++---------+--------+------------+
+| roll_no | name   | department |
++---------+--------+------------+
+|      13 | Nihal  | BBA        |
+|       1 | Arya   | BBA        |
+|      20 | vihan  | BBA        |
+|      11 | Mira   | BBA        |
+|      18 | shreya | BBA        |
+|      10 | Raya   | BBA        |
++---------+--------+------------+
+6 rows in set (0.04 sec)
+
+mysql> insert into student(roll_no,name,department)values(15,'sisu','BBA');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from student;
++---------+--------+------------+
+| roll_no | name   | department |
++---------+--------+------------+
+|      13 | Nihal  | BBA        |
+|       1 | Arya   | BBA        |
+|      20 | vihan  | BBA        |
+|      11 | Mira   | BBA        |
+|      18 | shreya | BBA        |
+|      10 | Raya   | BBA        |
+|      15 | sisu   | BBA        |
++---------+--------+------------+
+7 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from student;
++---------+--------+------------+
+| roll_no | name   | department |
++---------+--------+------------+
+|      13 | Nihal  | BBA        |
+|       1 | Arya   | BBA        |
+|      20 | vihan  | BBA        |
+|      11 | Mira   | BBA        |
+|      18 | shreya | BBA        |
+|      10 | Raya   | BBA        |
++---------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into student(roll_no,name,department)values(22,'Minnu','BBA');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> savepoint t1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student(roll_no,name,department)values(26,'Ruwa','BBA');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> savepoint t2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student(roll_no,name,department)values(27,'Reeha','BBA');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++---------+--------+------------+
+| roll_no | name   | department |
++---------+--------+------------+
+|      13 | Nihal  | BBA        |
+|       1 | Arya   | BBA        |
+|      20 | vihan  | BBA        |
+|      11 | Mira   | BBA        |
+|      18 | shreya | BBA        |
+|      10 | Raya   | BBA        |
+|      22 | Minnu  | BBA        |
+|      26 | Ruwa   | BBA        |
+|      27 | Reeha  | BBA        |
++---------+--------+------------+
+9 rows in set (0.00 sec)
+
+mysql> rollback to t2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from student;
++---------+--------+------------+
+| roll_no | name   | department |
++---------+--------+------------+
+|      13 | Nihal  | BBA        |
+|       1 | Arya   | BBA        |
+|      20 | vihan  | BBA        |
+|      11 | Mira   | BBA        |
+|      18 | shreya | BBA        |
+|      10 | Raya   | BBA        |
+|      22 | Minnu  | BBA        |
+|      26 | Ruwa   | BBA        |
++---------+--------+------------+
+8 rows in set (0.03 sec)
