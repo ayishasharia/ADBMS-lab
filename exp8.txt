@@ -1,0 +1,64 @@
+
+mysql> create user Mira@'localhost' identified by 'mira';
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> create user Moana@'localhost' identified by 'moana';
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> use INVOICE;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_invoice |
++-------------------+
+| customer          |
+| invoice_item      |
+| invoice_master    |
+| product           |
++-------------------+
+4 rows in set (0.10 sec)
+
+mysql> grant insert,select on invoice.customer to Mira@'localhost';
+Query OK, 0 rows affected (0.14 sec)
+
+
+mysql> grant update,delete on invoice.* to Moana@'localhost';
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> show grants for Mira@'localhost';
++---------------------------------------------------------------------+
+| Grants for Mira@localhost                                          |
++---------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Mira`@`localhost`                           |
+| GRANT SELECT, INSERT ON `invoice`.`customer` TO `Mira`@`localhost` |
++---------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> show grants for Moana@'localhost';
++------------------------------------------------------------+
+| Grants for Moana@localhost                                 |
++------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Moana`@`localhost`                  |
+| GRANT UPDATE, DELETE ON `invoice`.* TO `Moana`@`localhost` |
++------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+mysql> revoke delete on invoice.* from Moana@'localhost';
+Query OK, 0 rows affected (0.16 sec)
+
+
+mysql> show grants for Moana@'localhost';
++----------------------------------------------------+
+| Grants for Moana@localhost                         |
++----------------------------------------------------+
+| GRANT USAGE ON *.* TO `Moana`@`localhost`          |
+| GRANT UPDATE ON `invoice`.* TO `Moana`@`localhost` |
++----------------------------------------------------+
+2 rows in set (0.00 sec)
