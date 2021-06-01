@@ -1,0 +1,89 @@
+1.List the customer names of invoice date 3rd February 2018.
+
+mysql> use INVOICE;
+Database changed
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|      1 |       1 | 2021-01-02 |
+|      2 |       2 | 2021-01-10 |
+|      3 |       3 | 2021-01-12 |
+|      4 |       4 | 2021-03-21 |
+|      5 |       5 | 2021-02-26 |
++--------+---------+------------+
+5 rows in set (0.51 sec)
+
+mysql> select name from customer where cust_id =(select cust_id from invoice_master where inv_date='2021-02-26');
++-------+
+| name  |
++-------+
+| Nihal |
++-------+
+1 row in set (0.00 sec)
+
+2. List the product name and price of each invoice item.
+
+mysql> select P_name,price from product where p_id in (select p_id from invoice_item);
++-----------+-------+
+| P_name    | price |
++-----------+-------+
+| Butter    |    40 |
+| cheese    |   125 |
+| sauce     |   100 |
+| detergent |   206 |
++-----------+-------+
+4 rows in set (0.12 sec)
+
+3.List the product names, only include their purchased quantity more than 3.
+
+mysql> select p_name from product where p_id in (select p_id from invoice_item where quantity>3);
++-----------+
+| p_name    |
++-----------+
+| Butter    |
+| cheese    |
+| sauce     |
+| detergent |
++-----------+
+4 rows in set (0.02 sec)
+
+4.Find the product that has no sale
+
+mysql> select p_name from product where p_id not in(select P_id from invoice_item);
++--------+
+| p_name |
++--------+
+| Soap   |
+| eraser |
++--------+
+2 rows in set (0.05 sec)
+
+5.List the customer names who purchased the items ‘pen’ and ‘pencil’.
+
+mysql> select name from customer where cust_id in(select cust_id from invoice_master where inv_id in (select inv_id from invoice_item where p_id in (select P_id from product where p_name='pen') and (select p_id from product where p_name='pencil')));
+Empty set (0.04 sec)
+
+6.Display the purchased product details of the customer’xyz’.
+
+mysql> select * from invoice_item where inv_id in(select inv_id from invoice_master where cust_id in (select cust_id from customer where name='Nihal'));
++--------+------+----------+
+| inv_id | p_id | quantity |
++--------+------+----------+
+|      5 | 1003 |        7 |
++--------+------+----------+
+1 row in set (0.04 sec)
+
+7.List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
+
+mysql> select distinct name from customer where cust_id in (select cust_id from invoice_master where inv_id in(select inv_id from invoice_item where quantity>=2));
++-------+
+| name  |
++-------+
+| Amna  |
+| Arya  |
+| Manu  |
+| Aami  |
+| Nihal |
++-------+
+5 rows in set (0.00 sec)

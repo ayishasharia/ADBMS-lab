@@ -1,0 +1,106 @@
+mysql> use INVOICE;
+Database changed
+mysql> select * from product;
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+| 1000 | Butter    |    40 |
+| 1001 | cheese    |   125 |
+| 1002 | sauce     |   100 |
+| 1003 | detergent |   206 |
+| 1004 | Soap      |    30 |
+| 1005 | eraser    |    10 |
++------+-----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer;
++---------+-------------------------+--------------------+------------+-------+
+| cust_id | address                 | city               | ph_no      | name  |
++---------+-------------------------+--------------------+------------+-------+
+|       1 | marakars kappad         | kozhikode          | NULL       | Amna  |
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya  |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu  |
+|       4 | geetha 2ndstreet        | alappuzha          | 9567130600 | Aami  |
+|       5 | jannath kanjirapally    | Kozhikode          | 6282418462 | Nihal |
++---------+-------------------------+--------------------+------------+-------+
+5 rows in set (0.04 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. List product name, price except soap on price order.
+
+mysql>  select p_name,price from product where p_name != 'soap';
++-----------+-------+
+| p_name    | price |
++-----------+-------+
+| Butter    |    40 |
+| cheese    |   125 |
+| sauce     |   100 |
+| detergent |   206 |
+| eraser    |    10 |
++-----------+-------+
+5 rows in set (0.00 sec)
+
+2. Find minimum, maximum and average price of products.
+
+mysql> select min(price) from product;
++------------+
+| min(price) |
++------------+
+|         10 |
++------------+
+1 row in set (0.05 sec)
+
+mysql>  select max(price) from product;
++------------+
+| max(price) |
++------------+
+|        206 |
++------------+
+1 row in set (0.00 sec)
+
+mysql>  select avg(price) from product;
++------------+
+| avg(price) |
++------------+
+|    85.1667 |
++------------+
+1 row in set (0.01 sec)
+
+3. Find number of customers in each city.
+
+mysql>  SELECT city,count(city) as count FROM customer GROUP BY city;
++--------------------+-------+
+| city               | count |
++--------------------+-------+
+| kozhikode          |     2 |
+| ernakulam          |     1 |
+| thiruvananthapuram |     1 |
+| alappuzha          |     1 |
++--------------------+-------+
+4 rows in set (0.14 sec)
+
+4. Find number of customers in each city, only include city with more than 1 customers.
+
+mysql>  SELECT city,count(city) AS count FROM customer  GROUP BY city HAVING count(city) > 1;
++-----------+-------+
+| city      | count |
++-----------+-------+
+| kozhikode |     2 |
++-----------+-------+
+1 row in set (0.03 sec)
+
+5. Show data as displayed ‘who, where’ Eg: ‘customer1 lives in ekm’.
+
+mysql> SELECT CONCAT(name, ' lives in ', city) AS 'who, where' from customer;
++----------------------------------+
+| who, where                       |
++----------------------------------+
+| Amna lives in kozhikode          |
+| Arya lives in ernakulam          |
+| Manu lives in thiruvananthapuram |
+| Aami lives in alappuzha          |
+| Nihal lives in Kozhikode         |
++----------------------------------+
+5 rows in set (0.02 sec)
+
