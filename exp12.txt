@@ -1,0 +1,50 @@
+1.List the product name and quantity of invoice items.
+
+mysql> select p_name,quantity from product natural join invoice_item;
++-----------+----------+
+| p_name    | quantity |
++-----------+----------+
+| Butter    |        5 |
+| cheese    |       15 |
+| sauce     |       40 |
+| detergent |       25 |
+| detergent |        7 |
++-----------+----------+
+5 rows in set (0.04 sec)
+
+2.Display invoice details of the transaction dated ’31-01-2018’.
+
+select * from invoice_master natural join invoice_item natural join product natural join customer where inv_date="2021-03-21";
++---------+------+--------+------------+----------+-----------+-------+------------------+-----------+------------+------+
+| cust_id | p_id | inv_id | inv_date   | quantity | p_name    | price | address          | city      | ph_no      | name |
++---------+------+--------+------------+----------+-----------+-------+------------------+-----------+------------+------+
+|       4 | 1003 |      4 | 2021-03-21 |       25 | detergent |   206 | geetha 2ndstreet | alappuzha | 9567130600 | Aami |
++---------+------+--------+------------+----------+-----------+-------+------------------+-----------+------------+------+
+1 row in set (0.07 sec)
+
+3.Display the customer name, product name, invoice date of purchased item ‘pen’.
+
+mysql> select name,pname,inv_date from customer natural join product natural join invoice_master natural join invoice_item where pname="pen";
+
++-------+-------+------------+
+| name  | pname | inv_date   |
++-------+-------+------------+
+| Nihal | pen   | 2021-01-01 |
+| Aami  | pen   | 2021-02-03 |
++-------+-------+------------+
+2 rows in set (0.00 sec)
+
+4.Display all customer details and invoice details must include customer has not purchased items.
+
+mysql> select * from customer left join invoice_master natural join invoice_item natural join product on customer.cust_id=invoice_master.cust_id;
++---------+-------------------------+--------------------+------------+-------+------+--------+---------+------------+----------+-----------+-------+
+| cust_id | address                 | city               | ph_no      | name  | p_id | inv_id | cust_id | inv_date   | quantity | p_name    | price |
++---------+-------------------------+--------------------+------------+-------+------+--------+---------+------------+----------+-----------+-------+
+|       1 | marakars kappad         | kozhikode          | NULL       | Amna  | 1000 |      1 |       1 | 2021-01-02 |        5 | Butter    |    40 |
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya  | 1001 |      2 |       2 | 2021-01-10 |       15 | cheese    |   125 |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu  | 1002 |      3 |       3 | 2021-01-12 |       40 | sauce     |   100 |
+|       4 | geetha 2ndstreet        | alappuzha          | 9567130600 | Aami  | 1003 |      4 |       4 | 2021-03-21 |       25 | detergent |   206 |
+|       5 | jannath kanjirapally    | Kozhikode          | 6282418462 | Nihal | 1003 |      5 |       5 | 2021-02-26 |        7 | detergent |   206 |
++---------+-------------------------+--------------------+------------+-------+------+--------+---------+------------+----------+-----------+-------+
+5 rows in set (0.00 sec)
+
