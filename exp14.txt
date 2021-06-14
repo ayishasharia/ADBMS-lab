@@ -1,0 +1,65 @@
+1.      Display
+invoice details (customer name, invoice date) using set operation.
+mysql> select cust_id from customer union all select p_id from product;
++---------+
+| cust_id |
++---------+
+|       1 |
+|       2 |
+|       3 |
+|       4 |
+|       5 |
+|    1000 |
+|    1001 |
+|    1002 |
+|    1003 |
+|    1004 |
+|    1005 |
+|    1006 |
+|    1007 |
++---------+
+13 rows in set (0.05 sec)
+
+2.      Display
+product details with an updated price amount(new price= old price+5rs)
+
+mysql> select p_id,p_name,price+5 from product;
++------+-----------+---------+
+| p_id | p_name    | price+5 |
++------+-----------+---------+
+| 1000 | Butter    |      45 |
+| 1001 | cheese    |     130 |
+| 1002 | sauce     |     105 |
+| 1003 | detergent |     211 |
+| 1004 | Soap      |      35 |
+| 1005 | eraser    |      15 |
+| 1006 | pen       |      10 |
+| 1007 | pencil    |       7 |
++------+-----------+---------+
+8 rows in set (0.14 sec)
+
+
+3.      Display
+customer details who doesn’t have phone number and lives in ‘Calicut’ city (use
+logical operators)
+
+mysql> select * from customer where city="kozhikode" and ph_no is null;
++---------+-----------------+-----------+-------+------+
+| cust_id | address         | city      | ph_no | name |
++---------+-----------------+-----------+-------+------+
+|       1 | marakars kappad | kozhikode | NULL  | Amna |
++---------+-----------------+-----------+-------+------+
+1 row in set (0.02 sec)
+
+
+4.      List
+the product names if it finds any records in the invoice items table has
+quantity =3 (use special operators)
+
+mysql> select p_name from product where p_id in(select p_id from invoice_item where quantity=40);
++--------+
+| p_name |
++--------+
+| sauce  |
++--------+
+1 row in set (0.00 sec)
