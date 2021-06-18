@@ -48,3 +48,6 @@ mysql> select * from customer left join invoice_master natural join invoice_item
 +---------+-------------------------+--------------------+------------+-------+------+--------+---------+------------+----------+-----------+-------+
 5 rows in set (0.00 sec)
 
+
+
+//good
