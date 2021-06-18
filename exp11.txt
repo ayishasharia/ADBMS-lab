@@ -87,3 +87,5 @@ mysql> select distinct name from customer where cust_id in (select cust_id from 
 | Nihal |
 +-------+
 5 rows in set (0.00 sec)
+
+//good
