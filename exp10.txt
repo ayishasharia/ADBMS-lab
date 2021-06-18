@@ -43,7 +43,7 @@ mysql>  select p_name,price from product where p_name != 'soap';
 
 2. Find minimum, maximum and average price of products.
 
-mysql> select min(price) from product;
+mysql> select min(price) from product;      ////use a single query for min,mas, avg
 +------------+
 | min(price) |
 +------------+
