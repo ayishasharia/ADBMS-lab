@@ -118,3 +118,6 @@ mysql> call amount_details('Aami');
 2 rows in set (0.34 sec)
 
 Query OK, 0 rows affected (0.38 sec)
+
+
+//verified
