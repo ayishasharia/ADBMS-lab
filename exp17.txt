@@ -1,0 +1,97 @@
+1 -> CREATE A TRIGGER TO HANDLE UPDATES TO THE CUSTOMER TABLE.
+
+
+
+mysql> use INVOICE;
+Database changed
+mysql> create table customer_updates(cust_id int primary key,address varchar(20),city varchar(10),ph_no bigint,name varchar(20));
+Query OK, 0 rows affected (2.28 sec)
+
+mysql> delimiter // ;
+mysql> create trigger customer_updates
+    -> after update
+    -> on customer
+    -> for each row
+    -> begin
+    -> insert into customer_updates
+    -> set cust_id = old.cust_id,address = old.address,city = old.city,ph_no = old.ph_no,cust_name = old.name;
+    -> end //
+Query OK, 0 rows affected (0.40 sec)
+
+mysql> delimiter ; //
+mysql> update customer set address = 'Amnas home' where cust_name = 'Amna';
+Query OK, 0 rows affected (0.40 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from customer;
++---------+-------------------------+--------------------+------------+-------+
+| cust_id | address                 | city               | ph_no      | name  |
++---------+-------------------------+--------------------+------------+-------+
+|       1 | Amnas home              | kozhikode          | NULL       | Amna  |
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya  |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu  |
+|       4 | geetha 2ndstreet        | alappuzha          | 9567130600 | Aami  |
+|       5 | jannath kanjirapally    | Kozhikode          | 6282418462 | Nihal |
++---------+-------------------------+--------------------+------------+-------+
+5 rows in set (0.04 sec)
+
+mysql> select * from customer_updates;
++---------+---------------------+-----------+-------+-------+
+| cust_id | address             | city      | ph_no | cname |
++---------+---------------------+-----------+-------+-------+
+|       1 | Amnas home          | Kozhikode |  NULL | Amna  |
++---------+---------------------+-----------+-------+-------+
+1 row in set (0.00 sec)
+
+2 -> CREATE A TRIGGER TO HANDLE INSERTS TO THE PRODUCT RELATION( IF PRICE < 5 THEN SET PRICE TO 10).
+
+
+
+mysql> use INVOICE;
+Database changed
+mysql> delimiter // ;
+mysql> create trigger min_price
+    -> before insert
+    -> on product for each row
+    -> begin
+    -> if new.price <= 5 then
+    -> set new.price = 10;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> delimiter ; //
+mysql> select * from product;
+
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+| 1000 | Butter    |    40 |
+| 1001 | cheese    |   125 |
+| 1002 | sauce     |   100 |
+| 1003 | detergent |   206 |
+| 1004 | Soap      |    30 |
+| 1005 | eraser    |    10 |
++------+-----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into product values(1006,'book',3);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from product;
++------+-----------+-------+
+| p_id | p_name    | price |
++------+-----------+-------+
+| 1000 | Butter    |    40 |
+| 1001 | cheese    |   125 |
+| 1002 | sauce     |   100 |
+| 1003 | detergent |   206 |
+| 1004 | Soap      |    30 |
+| 1005 | eraser    |    10 |
+| 1006 | book      |    10 |
++------+-----------+-------+
+7 rows in set (0.00 sec)
+
+
+
+
