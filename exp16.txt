@@ -37,3 +37,6 @@ mysql> select p_id,p_name,price,price_ranges(price) from product order by price;
 | 1001 | cheese    |   125 | high                |
 | 1003 | detergent |   206 | high                |
 +------+-----------+-------+---------------------+
+
+
+//verified
