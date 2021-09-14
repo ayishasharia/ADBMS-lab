@@ -1,0 +1,134 @@
+1.Write a MongoDB query to display the customer documents having city ‘ekm’,’tvm’.
+
+-------------------------------------------------------------------------------------
+
+> use INVOICE
+switched to db INVOICE
+
+> db.CUSTOMER.insertMany([{NAME:"SUHA",CITY:"TVM",AGE:"60"},{NAME:"VIVAN",CITY:"EKM",AGE:"40"},{NAME:"RUA",CITY:"BANGALORE",AGE:"55"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6140b45535a3fe32808f7e50"),
+                ObjectId("6140b45535a3fe32808f7e51"),
+                ObjectId("6140b45535a3fe32808f7e52")
+        ]
+}
+
+> db.CUSTOMER.find().pretty()
+{
+        "_id" : ObjectId("61386301c79d1fb847445858"),
+        "NAME" : "RAYA",
+        "CITY" : "KOCHI",
+        "PHNO" : "9037428791"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb847445859"),
+        "NAME" : "MIRA",
+        "CITY" : "TRIVANDRUM",
+        "PHNO" : "8547586968"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb84744585a"),
+        "NAME" : "RIVA",
+        "CITY" : "BANGALORE",
+        "PHNO" : "9448707355"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb84744585b"),
+        "NAME" : "MEENU",
+        "CITY" : "CHENNAI",
+        "PHNO" : "7890654321"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e50"),
+        "NAME" : "SUHA",
+        "CITY" : "TVM",
+        "AGE" : "60"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e51"),
+        "NAME" : "VIVAN",
+        "CITY" : "EKM",
+        "AGE" : "40"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e52"),
+        "NAME" : "RUA",
+        "CITY" : "BANGALORE",
+        "AGE" : "55"
+}
+
+> db.CUSTOMER.find({$or:[{"CITY":"TVM"},{"CITY":"EKM"}]}).pretty()
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e50"),
+        "NAME" : "SUHA",
+        "CITY" : "TVM",
+        "AGE" : "60"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e51"),
+        "NAME" : "VIVAN",
+        "CITY" : "EKM",
+        "AGE" : "40"
+}
+
+---------------------------------------------------------------------------------------
+2.Write a MongoDB query to display all customer documents who have age >50.
+---------------------------------------------------------------------------------------
+
+> db.CUSTOMER.find({"AGE":{$gt:"50"}}).pretty()
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e50"),
+        "NAME" : "SUHA",
+        "CITY" : "TVM",
+        "AGE" : "60"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e52"),
+        "NAME" : "RUA",
+        "CITY" : "BANGALORE",
+        "AGE" : "55"
+}
+
+-----------------------------------------------------------------------------------------
+3.Write a MongoDB query to find customer documents who not live in ‘tvm’.
+-----------------------------------------------------------------------------------------
+
+> db.CUSTOMER.find({"CITY":{$ne:"TVM"}}).pretty()
+{
+        "_id" : ObjectId("61386301c79d1fb847445858"),
+        "NAME" : "RAYA",
+        "CITY" : "KOCHI",
+        "PHNO" : "9037428791"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb847445859"),
+        "NAME" : "MIRA",
+        "CITY" : "TRIVANDRUM",
+        "PHNO" : "8547586968"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb84744585a"),
+        "NAME" : "RIVA",
+        "CITY" : "BANGALORE",
+        "PHNO" : "9448707355"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb84744585b"),
+        "NAME" : "MEENU",
+        "CITY" : "CHENNAI",
+        "PHNO" : "7890654321"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e51"),
+        "NAME" : "VIVAN",
+        "CITY" : "EKM",
+        "AGE" : "40"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e52"),
+        "NAME" : "RUA",
+        "CITY" : "BANGALORE",
+        "AGE" : "55"
+}
