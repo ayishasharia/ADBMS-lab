@@ -1,0 +1,191 @@
+QUESTION
+---------
+
+DML COMMAND-SELECT QUERY 1
+-----------------------------
+
+1.LIST ALL CUSTOMER DETAILS.
+mysql> select * from customer;
++---------+-------------------------+--------------------+------------+-------+
+| cust_id | address                 | city               | ph_no      | name  |
++---------+-------------------------+--------------------+------------+-------+
+|       1 | marakars kappad         | kozhikode          | NULL       | Amna  |
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya  |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu  |
+|       4 | geetha 2ndstreet        | alappuzha          | 9567130600 | Aami  |
+|       5 | jannath kanjirapally    | kottayam           | 6282418462 | Nihal |
++---------+-------------------------+--------------------+------------+-------+
+5 rows in set (0.34 sec)
+
+2.List pname,price of all products.
+mysql> select p_name,price from product;
++-----------+-------+
+| p_name    | price |
++-----------+-------+
+| Butter    |    40 |
+| cheese    |   125 |
+| sauce     |   100 |
+| detergent |   206 |
++-----------+-------+
+4 rows in set (0.00 sec)
+
+3.List all invoice items,avoid duplicates.
+mysql> select distinct p_id  from invoice_item;
++------+
+| p_id |
++------+
+| 1000 |
+| 1001 |
+| 1002 |
+| 1003 |
++------+
+4 rows in set (0.08 sec)
+
+4.List product price between 50rs and 150rs.
+mysql> select price from product where price between 50 and 150;
++-------+
+| price |
++-------+
+|   125 |
+|   100 |
++-------+
+2 rows in set (0.05 sec)
+
+5.List the customer details who lives in 'ekm','tvm'.
+
+mysql> select * from customer where city in('ernakulam','thiruvananthapuram');
++---------+-------------------------+--------------------+------------+------+
+| cust_id | address                 | city               | ph_no      | name |
++---------+-------------------------+--------------------+------------+------+
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu |
++---------+-------------------------+--------------------+------------+------+
+2 rows in set (0.06 sec)
+
+6.List the invoice details from 1st january 2021 to 31st march 2021.
+
+mysql> select * from invoice_master where inv_date between '2021-01-01' and '2021-03-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|      1 |       1 | 2021-01-02 |
+|      2 |       2 | 2021-01-10 |
+|      3 |       3 | 2021-01-12 |
+|      4 |       4 | 2021-03-21 |
+|      5 |       5 | 2021-02-26 |
++--------+---------+------------+
+5 rows in set (0.07 sec)
+
+7.List the customer details who not live in 'tvm'.
+
+mysql> select * from customer where city not in('thiruvananthapuram');
++---------+-------------------------+-----------+------------+-------+
+| cust_id | address                 | city      | ph_no      | name  |
++---------+-------------------------+-----------+------------+-------+
+|       1 | marakars kappad         | kozhikode | NULL       | Amna  |
+|       2 | sopanam panampillynagar | ernakulam | NULL       | Arya  |
+|       4 | geetha 2ndstreet        | alappuzha | 9567130600 | Aami  |
+|       5 | jannath kanjirapally    | kottayam  | 6282418462 | Nihal |
++---------+-------------------------+-----------+------------+-------+
+4 rows in set (0.04 sec)
+
+8.List the customers who have no phone number.
+
+mysql> select name from customer where ph_no IS NULL;
++------+
+| name |
++------+
+| Amna |
+| Arya |
++------+
+2 rows in set (0.01 sec)
+
+9.Display customer names in descending order.
+
+mysql> select name from customer order by name desc;
++-------+
+| name  |
++-------+
+| Nihal |
+| Manu  |
+| Arya  |
+| Amna  |
+| Aami  |
++-------+
+5 rows in set (0.06 sec)
+
+
+10.Display the customer details sorted in ascending by city and descending by names.
+
+mysql> select * from customer order by city asc,name desc;
++---------+-------------------------+--------------------+------------+-------+
+| cust_id | address                 | city               | ph_no      | name  |
++---------+-------------------------+--------------------+------------+-------+
+|       4 | geetha 2ndstreet        | alappuzha          | 9567130600 | Aami  |
+|       2 | sopanam panampillynagar | ernakulam          | NULL       | Arya  |
+|       5 | jannath kanjirapally    | kottayam           | 6282418462 | Nihal |
+|       1 | marakars kappad         | kozhikode          | NULL       | Amna  |
+|       3 |  deepam gandhinagar     | thiruvananthapuram | 9567130694 | Manu  |
++---------+-------------------------+--------------------+------------+-------+
+5 rows in set (0.00 sec)
+
+
+11.Find the customer names start with 'A'.
+
+mysql> select name from customer where name like binary 'A%';
++------+
+| name |
++------+
+| Amna |
+| Arya |
+| Aami |
++------+
+3 rows in set (0.06 sec)
+
+12.Find the customer names who have 'e' or  'a' in them.
+
+mysql> select name from customer where name like binary '%e%' or  name like binary '%a%';
++-------+
+| name  |
++-------+
+| Amna  |
+| Arya  |
+| Manu  |
+| Aami  |
+| Nihal |
++-------+
+5 rows in set (0.00 sec)
+
+13.Find the customer names who have at least 3 characters.
+
+mysql> select name from customer where name like '___%';
++-------+
+| name  |
++-------+
+| Amna  |
+| Arya  |
+| Manu  |
+| Aami  |
+| Nihal |
++-------+
+5 rows in set (0.00 sec)
+
+14.List the names of customers their names have 'r' in second posititon.
+
+mysql> select name from customer where name like binary '_r%';
++------+
+| name |
++------+
+| Arya |
++------+
+1 row in set (0.00 sec)
+
+15.Find the customer names start with 'a' and are at least 3 characters in length.
+
+mysql> select name from customer where name like binary '_r%';
++------+
+| name |
++------+
+| Arya |
++------+
+1 row in set (0.00 sec)
