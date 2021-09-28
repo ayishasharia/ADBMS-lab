@@ -1,0 +1,145 @@
+1.Writea MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+--------------------------------------------------------------------------------------------------------
+use INVOICE
+switched to db INVOICE
+
+> db.createUser({user: "CUSTOMER1",pwd: "customer1",roles: [{ role: "read", db: "INVOICE" }]})
+Successfully added user: {
+        "user" : "CUSTOMER1",
+        "roles" : [
+                {
+                        "role" : "read",
+                        "db" : "INVOICE"
+                }
+        ]
+}
+> exit
+bye
+------------------------------------------------------------------------------------------------------------
+2.Write a MongoDB query to create the backup for the INVOICE database.
+------------------------------------------------------------------------------------------------------------
+
+_____________________________________________
+Step1: open a command prompt and
+	run mongo instance:
+_____________________________________________
+
+C:\Users\IN>cd C:\Program Files\MongoDB\Server\5.0\bin
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongod
+{"t":{"$date":"2021-09-28T21:21:48.908+05:30"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2021-09-28T21:21:50.508+05:30"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"-","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":13},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":13},"outgoing":{"minWireVersion":0,"maxWireVersion":13},"isInternalClient":true}}}
+{"t":{"$date":"2021-09-28T21:21:50.509+05:30"},"s":"W",  "c":"ASIO",     "id":22601,   "ctx":"main","msg":"No TransportLayer configured during NetworkInterface startup"}
+{"t":{"$date":"2021-09-28T21:21:50.511+05:30"},"s":"I",  "c":"NETWORK",  "id":4648602, "ctx":"main","msg":"Implicit TCP FastOpen in use."}
+{"t":{"$date":"2021-09-28T21:21:50.513+05:30"},"s":"W",  "c":"ASIO",     "id":22601,   "ctx":"main","msg":"No TransportLayer configured during NetworkInterface startup"}
+{"t":{"$date":"2021-09-28T21:21:50.514+05:30"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","ns":"config.tenantMigrationDonors"}}
+{"t":{"$date":"2021-09-28T21:21:50.514+05:30"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","ns":"config.tenantMigrationRecipients"}}
+{"t":{"$date":"2021-09-28T21:21:50.515+05:30"},"s":"I",  "c":"CONTROL",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":7412,"port":27017,"dbPath":"C:/data/db/","architecture":"64-bit","host":"DESKTOP-GBJACJ5"}}
+{"t":{"$date":"2021-09-28T21:21:50.515+05:30"},"s":"I",  "c":"CONTROL",  "id":23398,   "ctx":"initandlisten","msg":"Target operating system minimum version","attr":{"targetMinOS":"Windows 7/Windows Server 2008 R2"}}
+{"t":{"$date":"2021-09-28T21:21:50.515+05:30"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"5.0.2","gitVersion":"6d9ec525e78465dcecadcff99cce953d380fedc8","modules":[],"allocator":"tcmalloc","environment":{"distmod":"windows","distarch":"x86_64","target_arch":"x86_64"}}}}
+{"t":{"$date":"2021-09-28T21:21:50.515+05:30"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Microsoft Windows 10","version":"10.0 (build 18363)"}}}
+{"t":{"$date":"2021-09-28T21:21:50.516+05:30"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{}}}
+{"t":{"$date":"2021-09-28T21:21:50.522+05:30"},"s":"E",  "c":"CONTROL",  "id":20557,   "ctx":"initandlisten","msg":"DBException in initAndListen, terminating","attr":{"error":"NonExistentPath: Data directory C:\\data\\db\\ not found. Create the missing directory or specify another path using (1) the --dbpath command line option, or (2) by adding the 'storage.dbPath' option in the configuration file."}}
+{"t":{"$date":"2021-09-28T21:21:50.523+05:30"},"s":"I",  "c":"REPL",     "id":4784900, "ctx":"initandlisten","msg":"Stepping down the ReplicationCoordinator for shutdown","attr":{"waitTimeMillis":15000}}
+{"t":{"$date":"2021-09-28T21:21:50.524+05:30"},"s":"I",  "c":"COMMAND",  "id":4784901, "ctx":"initandlisten","msg":"Shutting down the MirrorMaestro"}
+{"t":{"$date":"2021-09-28T21:21:50.524+05:30"},"s":"I",  "c":"SHARDING", "id":4784902, "ctx":"initandlisten","msg":"Shutting down the WaitForMajorityService"}
+{"t":{"$date":"2021-09-28T21:21:50.525+05:30"},"s":"I",  "c":"NETWORK",  "id":20562,   "ctx":"initandlisten","msg":"Shutdown: going to close listening sockets"}
+{"t":{"$date":"2021-09-28T21:21:50.525+05:30"},"s":"I",  "c":"NETWORK",  "id":4784905, "ctx":"initandlisten","msg":"Shutting down the global connection pool"}
+{"t":{"$date":"2021-09-28T21:21:50.526+05:30"},"s":"I",  "c":"CONTROL",  "id":4784906, "ctx":"initandlisten","msg":"Shutting down the FlowControlTicketholder"}
+{"t":{"$date":"2021-09-28T21:21:50.527+05:30"},"s":"I",  "c":"-",        "id":20520,   "ctx":"initandlisten","msg":"Stopping further Flow Control ticket acquisitions."}
+{"t":{"$date":"2021-09-28T21:21:50.528+05:30"},"s":"I",  "c":"NETWORK",  "id":4784918, "ctx":"initandlisten","msg":"Shutting down the ReplicaSetMonitor"}
+{"t":{"$date":"2021-09-28T21:21:50.528+05:30"},"s":"I",  "c":"SHARDING", "id":4784921, "ctx":"initandlisten","msg":"Shutting down the MigrationUtilExecutor"}
+{"t":{"$date":"2021-09-28T21:21:50.530+05:30"},"s":"I",  "c":"ASIO",     "id":22582,   "ctx":"MigrationUtil-TaskExecutor","msg":"Killing all outstanding egress activity."}
+{"t":{"$date":"2021-09-28T21:21:50.533+05:30"},"s":"I",  "c":"COMMAND",  "id":4784923, "ctx":"initandlisten","msg":"Shutting down the ServiceEntryPoint"}
+{"t":{"$date":"2021-09-28T21:21:50.533+05:30"},"s":"I",  "c":"CONTROL",  "id":4784925, "ctx":"initandlisten","msg":"Shutting down free monitoring"}
+{"t":{"$date":"2021-09-28T21:21:50.534+05:30"},"s":"I",  "c":"CONTROL",  "id":4784927, "ctx":"initandlisten","msg":"Shutting down the HealthLog"}
+{"t":{"$date":"2021-09-28T21:21:50.535+05:30"},"s":"I",  "c":"CONTROL",  "id":4784928, "ctx":"initandlisten","msg":"Shutting down the TTL monitor"}
+{"t":{"$date":"2021-09-28T21:21:50.535+05:30"},"s":"I",  "c":"CONTROL",  "id":4784929, "ctx":"initandlisten","msg":"Acquiring the global lock for shutdown"}
+{"t":{"$date":"2021-09-28T21:21:50.536+05:30"},"s":"I",  "c":"-",        "id":4784931, "ctx":"initandlisten","msg":"Dropping the scope cache for shutdown"}
+{"t":{"$date":"2021-09-28T21:21:50.536+05:30"},"s":"I",  "c":"FTDC",     "id":4784926, "ctx":"initandlisten","msg":"Shutting down full-time data capture"}
+{"t":{"$date":"2021-09-28T21:21:50.537+05:30"},"s":"I",  "c":"CONTROL",  "id":20565,   "ctx":"initandlisten","msg":"Now exiting"}
+{"t":{"$date":"2021-09-28T21:21:50.538+05:30"},"s":"I",  "c":"CONTROL",  "id":23138,   "ctx":"initandlisten","msg":"Shutting down","attr":{"exitCode":100}}
+
+______________________________________________________________________________________
+Step2: open another command
+	prompt and run mongo shell
+_______________________________________________________________________________________
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongo
+MongoDB shell version v5.0.2
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("dd5a0bf5-0fc0-473e-b432-229550b69b32") }
+MongoDB server version: 5.0.2
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+We recommend you begin using "mongosh".
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2021-09-23T20:55:41.852+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+__________________________________________________________________________________________
+Step 3: open another command prompt as
+	administrator and give mongodb path and run mongodump
+__________________________________________________________________________________________
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongodump
+2021-09-28T22:13:51.623+0530    writing admin.system.users to dump\admin\system.users.bson
+2021-09-28T22:13:51.755+0530    done dumping admin.system.users (1 document)
+2021-09-28T22:13:51.756+0530    writing admin.system.version to dump\admin\system.version.bson
+2021-09-28T22:13:51.762+0530    done dumping admin.system.version (2 documents)
+2021-09-28T22:13:51.801+0530    writing INVOICE.CUSTOMER to dump\INVOICE\CUSTOMER.bson
+2021-09-28T22:13:51.806+0530    done dumping INVOICE.CUSTOMER (7 documents)
+2021-09-28T22:13:52.108+0530    writing INVOICE.PRODUCT to dump\INVOICE\PRODUCT.bson
+2021-09-28T22:13:52.114+0530    done dumping INVOICE.PRODUCT (4 documents)
+
+
+OUTPUT
+========
+Now the bin folder automatically
+created the dump folder
+
+Inside the dump folder we can see all
+dbs
+
+delete dump folder and then ,we started to backup INVOICE database
+
+__________________________________________________________________________________________
+Step 4: reopen adminitrator command
+__________________________________________________________________________________________
+
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongodump --db INVOICE
+2021-09-28T22:15:31.303+0530    writing INVOICE.CUSTOMER to dump\INVOICE\CUSTOMER.bson
+2021-09-28T22:15:31.316+0530    done dumping INVOICE.CUSTOMER (7 documents)
+2021-09-28T22:15:31.538+0530    writing INVOICE.PRODUCT to dump\INVOICE\PRODUCT.bson
+2021-09-28T22:15:31.544+0530    done dumping INVOICE.PRODUCT (4 documents)
+
+OUTPUT
+========
+Now the bin folder automatically
+created the dump folder
+
+Inside the dump folder we can see INVOICE db only
+
+
+
+
+
+
