@@ -1,0 +1,78 @@
+1.Write a MongoDB query to create an index for the collection customer using the field customer_name.
+********************************************************************************************************
+
+
+
+> show dbs
+INVOICE  0.000GB
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+student  0.000GB
+test     0.000GB
+
+
+
+> use INVOICE
+switched to db INVOICE
+
+> show collections
+CUSTOMER
+PRODUCT
+
+
+> db.CUSTOMER.find().pretty()
+{
+        "_id" : ObjectId("61386301c79d1fb847445858"),
+        "NAME" : "RAYA",
+        "CITY" : "KOCHI",
+        "PHNO" : "9037428791"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb847445859"),
+        "NAME" : "MIRA",
+        "CITY" : "TRIVANDRUM",
+        "PHNO" : "8547586968"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb84744585a"),
+        "NAME" : "RIVA",
+        "CITY" : "BANGALORE",
+        "PHNO" : "9448707355"
+}
+{
+        "_id" : ObjectId("61386301c79d1fb84744585b"),
+        "NAME" : "MEENU",
+        "CITY" : "CHENNAI",
+        "PHNO" : "7890654321"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e50"),
+        "NAME" : "SUHA",
+        "CITY" : "TVM",
+        "AGE" : "60"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e51"),
+        "NAME" : "VIVAN",
+        "CITY" : "EKM",
+        "AGE" : "40"
+}
+{
+        "_id" : ObjectId("6140b45535a3fe32808f7e52"),
+        "NAME" : "RUA",
+        "CITY" : "BANGALORE",
+        "AGE" : "55"
+}
+
+> db.CUSTOMER.getIndexes()
+[
+        {
+                "v" : 2,
+                "key" : {
+                        "_id" : 1
+                },
+                "name" : "_id_"
+        }
+        
+]
